@@ -19,10 +19,22 @@ const refs = {
 
 let country = "";
 
+function renderShortMarkup(data) {
+  const markup = data.map(createShortMarkup).join("");
+  refs.list.insertAdjacentHTML("afterbegin", markup);
+}
+
+function renderDetailedMarkup(data) {
+  const markup = data.map(createDetailedMarkup).join("");
+  refs.container.insertAdjacentHTML("afterbegin", markup);
+}
+
+
+
 const handleInput = (event) => {
     event.preventDefault();
     country = event.target.value.trim().toLowerCase();
-    console.log(country);
+    // console.log(country);
 
     if (country === "") {
         Notify.failure("Please, enter data to search!!!");
@@ -30,8 +42,24 @@ const handleInput = (event) => {
             (refs.container.innerHTML = "");
     };
 
-    // console.log('get');
-};
+    fetchCountries(country)
+    .then(data => {
+      if (data.length === 1) {
+        renderDetailedMarkup(data);
+      } else if (data.length >= 2 && data.length <= 10) {
+        renderShortMarkup(data);
+      } else {
+        return Notify.info("Too many matches found. Please enter a more specific name."
+  );
+;
+      }
+    })
+    .catch(error => {
+      return Notify.failure("Oops, there is no country with that name");
+     
+    });
+}
+
 
 refs.input.addEventListener('input', debounce(handleInput, DEBOUNCE_DELAY));
 

@@ -2,8 +2,7 @@ export function createShortMarkup({flags, name}) {
 return  `<li class="country-list__item">
             <img class="country-list__img" 
             src="${flags.svg}" alt="flag of country">
-            width = "40px"
-            height = "20px"
+            width="40" height="20"
             <p class="country-list__name">${name.official}</p>
         </li>`
 };
@@ -14,8 +13,7 @@ export function createDetailedMarkup({flags, name, capital, population, language
     return  `<div class="country-list__item">
             <img class="country-list__img"
             src="${flags.svg}" alt="flag of country">
-            width = "40px"
-            height = "20px"
+            width="50" height="40"
             <p class="country-list__name--big">${name.official}</p>
          </div>
          <div class="detail">

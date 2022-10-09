@@ -12,9 +12,16 @@ body {
   line-height: 1.5;
 }
 
+input:focus {
+  outline: none !important;
+  border-color:darkblue;
+  border-radius: 3px;
+}
+
 #search-box {
   font: inherit;
   padding: 8px;
   max-width: 320px;
   margin-bottom: 16px;
 }
+
