@@ -1,8 +1,8 @@
 export function createShortMarkup({flags, name}) {
 return  `<li class="country-list__item">
             <img class="country-list__img" 
-            src="${flags.svg}" alt="flag of country">
-            width="40" height="20"
+            src="${flags.svg}" width="40" height="20" alt="flag of country">
+            
             <p class="country-list__name">${name.official}</p>
         </li>`
 };
@@ -10,10 +10,10 @@ return  `<li class="country-list__item">
 export function createDetailedMarkup({flags, name, capital, population, languages}) {
     const languagesToString = Object.values(languages).join(", ");
     // console.log(languagesToString);
-    return  `<div class="country-list__item">
+    return  `<div class="country-list__detail">
             <img class="country-list__img"
-            src="${flags.svg}" alt="flag of country">
-            width="50" height="40"
+            src="${flags.svg}" width="200" height="80" alt="flag of country">
+            
             <p class="country-list__name--big">${name.official}</p>
          </div>
          <div class="detail">

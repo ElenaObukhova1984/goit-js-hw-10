@@ -12,6 +12,40 @@ body {
   line-height: 1.5;
 }
 
+.country-list {
+  /* display: flex; */
+  list-style: none;
+ 
+}
+
+/* .country-info {
+  display: flex;
+  flex-direction: row;
+} */
+
+.country-list__item {
+  display: flex;
+  list-style: none;
+}
+
+.country-list__name {
+  margin-left: 20px;
+  text-align: center;
+}
+
+.country-list__name--big {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.detail__name {
+  font-weight: bold;
+}
+
+.detail__info {
+  font-weight: 400;
+}
+
 input:focus {
   outline: none !important;
   border-color:darkblue;

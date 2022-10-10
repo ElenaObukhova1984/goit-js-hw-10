@@ -44,15 +44,12 @@ const handleInput = (event) => {
 
     fetchCountries(country)
     .then(data => {
-      if (data.length === 1) {
-        renderDetailedMarkup(data);
-      } else if (data.length >= 2 && data.length <= 10) {
-        renderShortMarkup(data);
-      } else {
-        return Notify.info("Too many matches found. Please enter a more specific name."
-  );
-;
-      }
+        if (data.length === 1) {
+            renderDetailedMarkup(data);
+        } else if (data.length >= 10) {
+            Notify.info("Too many matches found. Please enter a more specific name.")
+        } else { renderShortMarkup(data) };
+       
     })
     .catch(error => {
       return Notify.failure("Oops, there is no country with that name");
