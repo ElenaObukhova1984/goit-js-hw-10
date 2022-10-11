@@ -1,3 +1,6 @@
+import { refs } from "./index";
+
+
 export function createShortMarkup(data) {
     const markup = data.map(({ flags, name }) => {
         return `<li class="country-list__item">

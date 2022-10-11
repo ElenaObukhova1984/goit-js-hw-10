@@ -4,7 +4,6 @@ import debounce from 'lodash.debounce';
 
 import { createShortMarkup } from './createMarkup';
 import { createDetailedMarkup } from './createMarkup';
-import { clearMarkup } from './clearMarkup';
 import { fetchCountries } from './fetchCountries';
 
 
@@ -12,18 +11,18 @@ import { fetchCountries } from './fetchCountries';
 const DEBOUNCE_DELAY = 300;
 
 
-const refs = {
+export const refs = {
     input: document.querySelector("#search-box"),
     list: document.querySelector(".country-list"),
     container: document.querySelector(".country-info"),
 };
 // console.log(refs.input);
 
-// let country = "";
+
 
 
 const handleInput = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     country = event.target.value.trim().toLowerCase();
     // console.log(country);
 
@@ -34,15 +33,15 @@ const handleInput = (event) => {
 
     fetchCountries(country)
     .then(data => {
-        if (data.length > 10) {
-            Notify.info("Too many matches found. Please enter a more specific name.");
-            clearMarkup();
-        } if (data.length === 1) {
+        if (data.length === 1) {
             clearMarkup();
             createDetailedMarkup(data);
-        } if (data.length > 1 & data.length <= 10) {
+        } else if (data.length > 10) {
+            Notify.info("Too many matches found. Please enter a more specific name.");
+            clearMarkup();
+        } else {
             createShortMarkup(data)
-        };
+        }
        
     }).catch(error => {
         Notify.failure("Oops, there is no country with that name");
@@ -51,16 +50,12 @@ const handleInput = (event) => {
     });
 }
 
+function clearMarkup() {
+    refs.list.innerHTML = "";
+    refs.container.innerHTML = "";
+}
+
 
 refs.input.addEventListener('input', debounce(handleInput, DEBOUNCE_DELAY));
 
-// .then(data => {
-//         if (data.length === 1) {
-//             clearMarkup();
-//             createDetailedMarkup(data);
-//         } else if (data.length > 10) {
-//             Notify.info("Too many matches found. Please enter a more specific name.");
-//             clearMarkup();
-//         } else {
-//             createShortMarkup(data)
-//         };
+

@@ -32,6 +32,7 @@ body {
 }
 
 .country-list__name {
+  display: block;
   margin-left: 20px;
   text-align: center;
 }
