@@ -4,7 +4,9 @@ import debounce from 'lodash.debounce';
 
 import { createShortMarkup } from './createMarkup';
 import { createDetailedMarkup } from './createMarkup';
+import { clearMarkup } from './clearMarkup';
 import { fetchCountries } from './fetchCountries';
+
 
 
 const DEBOUNCE_DELAY = 300;
@@ -17,18 +19,7 @@ const refs = {
 };
 // console.log(refs.input);
 
-let country = "";
-
-function renderShortMarkup(data) {
-  const markup = data.map(createShortMarkup).join("");
-  refs.list.insertAdjacentHTML("afterbegin", markup);
-}
-
-function renderDetailedMarkup(data) {
-  const markup = data.map(createDetailedMarkup).join("");
-  refs.container.insertAdjacentHTML("afterbegin", markup);
-}
-
+// let country = "";
 
 
 const handleInput = (event) => {
@@ -38,21 +29,24 @@ const handleInput = (event) => {
 
     if (country === "") {
         Notify.failure("Please, enter data to search!!!");
-        return (refs.list.innerHTML = ""),
-            (refs.container.innerHTML = "");
+        return clearMarkup();
     };
 
     fetchCountries(country)
     .then(data => {
-        if (data.length === 1) {
-            renderDetailedMarkup(data);
-        } else if (data.length >= 10) {
-            Notify.info("Too many matches found. Please enter a more specific name.")
-        } else { renderShortMarkup(data) };
+        if (data.length > 10) {
+            Notify.info("Too many matches found. Please enter a more specific name.");
+            clearMarkup();
+        } if (data.length === 1) {
+            clearMarkup();
+            createDetailedMarkup(data);
+        } if (data.length > 1 & data.length <= 10) {
+            createShortMarkup(data)
+        };
        
-    })
-    .catch(error => {
-      return Notify.failure("Oops, there is no country with that name");
+    }).catch(error => {
+        Notify.failure("Oops, there is no country with that name");
+        clearMarkup();
      
     });
 }
@@ -60,3 +54,13 @@ const handleInput = (event) => {
 
 refs.input.addEventListener('input', debounce(handleInput, DEBOUNCE_DELAY));
 
+// .then(data => {
+//         if (data.length === 1) {
+//             clearMarkup();
+//             createDetailedMarkup(data);
+//         } else if (data.length > 10) {
+//             Notify.info("Too many matches found. Please enter a more specific name.");
+//             clearMarkup();
+//         } else {
+//             createShortMarkup(data)
+//         };
