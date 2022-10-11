@@ -20,7 +20,7 @@ export function createDetailedMarkup(data) {
     // console.log(languagesToString);
     return  `<div class="country-list__detail">
                 <img class="country-list__img"
-                src="${flags.svg}" width="200" height="80" alt="flag of country">
+                src="${flags.svg}" width="40" height="30" alt="flag of country">
                 
                 <p class="country-list__name--big">${name.official}</p>
            </div>

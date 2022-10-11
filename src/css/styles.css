@@ -20,15 +20,17 @@ body {
  
 }
 
-/* .country-info {
-  display: flex;
-  flex-direction: row;
-} */
 
 .country-list__item {
   display: flex;
   align-items: center;
   list-style: none;
+}
+
+.country-list__detail {
+  display: flex;
+  align-items: center;
+  
 }
 
 .country-list__name {
@@ -40,6 +42,7 @@ body {
 .country-list__name--big {
   font-size: 25px;
   font-weight: bold;
+  margin-left: 20px;
 }
 
 .detail__name {
