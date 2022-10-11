@@ -18,7 +18,7 @@ export const refs = {
 };
 // console.log(refs.input);
 
-
+let country = "";
 
 
 const handleInput = (event) => {
@@ -57,5 +57,6 @@ function clearMarkup() {
 
 
 refs.input.addEventListener('input', debounce(handleInput, DEBOUNCE_DELAY));
+
 
 
